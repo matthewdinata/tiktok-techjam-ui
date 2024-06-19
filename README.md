@@ -20,6 +20,36 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Running on Docker
+
+### With Docker Compose
+
+Start the app
+
+```bash
+docker compose up --build
+```
+
+Stop the app
+
+```bash
+docker compose down
+```
+
+### Without Docker Compose
+
+Build Docker image
+
+```bash
+docker build -t tiktok-techjam-ui .
+```
+
+Run the app
+
+```bash
+docker run -p 3000:3000 tiktok-techjam-ui
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
