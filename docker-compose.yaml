@@ -1,11 +1,11 @@
 services:
-  dev:
-    image: tiktok-techjam-ui
-    hostname: dev
-    build: .
-    ports:
-      - '3000:3000'
-    restart: always
-    volumes:
-      - .:/app
-    command: npm run dev
+    dev:
+        image: tiktok-techjam-ui
+        hostname: dev
+        build: .
+        ports:
+            - "3000:3000"
+        restart: always
+        volumes:
+            - .:/app
+        command: npm run dev
