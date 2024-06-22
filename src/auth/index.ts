@@ -1,18 +1,9 @@
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 
-import db from "@/db";
+import authConfig from "./auth.config";
 
-export const { handlers, auth } = NextAuth({
+export const { handlers, auth, signIn, signOut } = NextAuth({
+	...authConfig,
 	providers: [Google],
-	adapter: DrizzleAdapter(db),
-	callbacks: {
-		async session({ session, user }) {
-			const updatedSession = session;
-			updatedSession.user.id = user.id;
-
-			return updatedSession;
-		},
-	},
 });

@@ -1,15 +1,10 @@
 import Image from "next/image";
-import { redirect } from "next/navigation";
 
-import { auth } from "@/auth";
+import { signOut } from "@/auth";
 
-export default async function Home() {
-	const session = await auth();
+import SignOutButton from "./components/sign-out-button";
 
-	if (!session?.user) {
-		redirect("/api/auth/signin?callbackUrl=/");
-	}
-
+export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -50,7 +45,15 @@ export default async function Home() {
 				/>
 			</div>
 
-			<div>{JSON.stringify(session.user, null, 2)}</div>
+			<div className="py-12">
+				<SignOutButton
+					signOut={async () => {
+						"use server";
+
+						await signOut({ redirectTo: "/" });
+					}}
+				/>
+			</div>
 
 			<div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
 				<a
