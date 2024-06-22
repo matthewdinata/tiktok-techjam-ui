@@ -37,5 +37,14 @@ module.exports = {
 		],
 		"react/prop-types": "off",
 		"react/require-default-props": "off",
+		"import/no-extraneous-dependencies": "off",
 	},
+	overrides: [
+		{
+			files: ["**/*.tsx"],
+			rules: {
+				"react/jsx-props-no-spreading": "off",
+			},
+		},
+	],
 };

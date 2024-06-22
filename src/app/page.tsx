@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+import { signOut } from "@/auth";
+
+import SignOutButton from "./components/sign-out-button";
+
 export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -38,6 +42,16 @@ export default function Home() {
 					width={180}
 					height={37}
 					priority
+				/>
+			</div>
+
+			<div className="py-12">
+				<SignOutButton
+					signOut={async () => {
+						"use server";
+
+						await signOut({ redirectTo: "/" });
+					}}
 				/>
 			</div>
 
