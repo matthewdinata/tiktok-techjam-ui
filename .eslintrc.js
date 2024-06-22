@@ -37,6 +37,7 @@ module.exports = {
 		],
 		"react/prop-types": "off",
 		"react/require-default-props": "off",
+		"import/no-extraneous-dependencies": "off",
 	},
 	overrides: [
 		{
