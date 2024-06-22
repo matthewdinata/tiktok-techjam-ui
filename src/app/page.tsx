@@ -1,6 +1,15 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+import { auth } from "@/auth";
+
+export default async function Home() {
+	const session = await auth();
+
+	if (!session?.user) {
+		redirect("/api/auth/signin?callbackUrl=/");
+	}
+
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -40,6 +49,8 @@ export default function Home() {
 					priority
 				/>
 			</div>
+
+			<div>{JSON.stringify(session.user, null, 2)}</div>
 
 			<div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
 				<a
