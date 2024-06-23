@@ -52,7 +52,9 @@ export default function VideoContainer({
 }: VideoContainerProps) {
 	const [isMuted, setIsMuted] = useState<boolean>(true);
 	return (
-		<div className="w-full h-full relative p-4 flex flex-col justify-between">
+		<div
+			className={`w-full h-full relative p-4 flex flex-col  ${isMuted ? "justify-between" : "justify-end"}`}
+		>
 			{/* eslint-disable-next-line */}
 			<video
 				src={src}
@@ -66,7 +68,7 @@ export default function VideoContainer({
 			<div className="absolute bottom-[15%] right-3">
 				<VideoActionButtons />
 			</div>
-			{isMuted ? (
+			{isMuted && (
 				<Button
 					onClick={() => setIsMuted(false)}
 					variant="outline"
@@ -75,10 +77,8 @@ export default function VideoContainer({
 					<BsVolumeMuteFill fontSize={18} className="mr-1" />
 					Unmute
 				</Button>
-			) : (
-				<></>
 			)}
-			<div className="text-white max-w-[70%] flex flex-col gap-1">
+			<div className="text-white max-w-[70%] flex flex-col gap-1 ">
 				<div className="font-medium text-base text-[1.05rem]">
 					{name}
 				</div>
