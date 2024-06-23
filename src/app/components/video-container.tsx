@@ -2,9 +2,38 @@
 
 import { useState } from "react";
 import { BsVolumeMuteFill } from "react-icons/bs";
+import { FaCommentDots } from "react-icons/fa6";
 import { HiMusicNote } from "react-icons/hi";
+import { IoMdPerson } from "react-icons/io";
+import { IoHeart } from "react-icons/io5";
+import { RiShareForwardFill } from "react-icons/ri";
 
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+
+function VideoActionButtons() {
+	return (
+		<div className="flex flex-col text-white font-medium gap-4 text-sm shadow-sm items-center">
+			<Avatar className="mb-2 w-9 h-9">
+				<AvatarFallback>
+					<IoMdPerson fontSize={24} className="text-gray-300" />
+				</AvatarFallback>
+			</Avatar>
+			<div className="flex flex-col items-center">
+				<IoHeart fontSize={36} />
+				<span>81.2K</span>
+			</div>
+			<div className="flex flex-col items-center">
+				<FaCommentDots fontSize={32} />
+				<span>319</span>
+			</div>
+			<div className="flex flex-col items-center">
+				<RiShareForwardFill fontSize={36} />
+				<span>185</span>
+			</div>
+		</div>
+	);
+}
 
 type VideoContainerProps = {
 	src: string;
@@ -34,6 +63,9 @@ export default function VideoContainer({
 				playsInline
 				loop
 			/>
+			<div className="absolute bottom-[15%] right-3">
+				<VideoActionButtons />
+			</div>
 			{isMuted ? (
 				<Button
 					onClick={() => setIsMuted(false)}
