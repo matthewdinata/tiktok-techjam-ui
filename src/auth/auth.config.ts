@@ -6,6 +6,9 @@ import db from "@/db";
 export default {
 	adapter: DrizzleAdapter(db),
 	providers: [],
+	pages: {
+		signIn: "/signin",
+	},
 	callbacks: {
 		async session({ session, user }) {
 			const updatedSession = session;
@@ -17,8 +20,8 @@ export default {
 			const isLoggedIn = !!auth?.user;
 
 			if (!isLoggedIn) {
-				const redirectUrl = new URL("api/auth/signin", nextUrl.origin);
-				redirectUrl.searchParams.append("callbackUrl", nextUrl.href);
+				const redirectUrl = new URL("signin", nextUrl.origin);
+
 				return Response.redirect(redirectUrl);
 			}
 			return true;
