@@ -53,7 +53,6 @@ export default function VideoContainer({
 			<video
 				src={src}
 				className="z-[-10] w-full absolute top-0 left-0"
-				// TODO: uncomment autoPlay
 				autoPlay
 				muted={muted}
 				playsInline

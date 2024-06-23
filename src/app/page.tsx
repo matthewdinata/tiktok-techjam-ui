@@ -2,30 +2,56 @@
 
 import { useState } from "react";
 import { BsVolumeMuteFill } from "react-icons/bs";
+import { FiMenu } from "react-icons/fi";
+import { IoSearch } from "react-icons/io5";
 
 import { Button } from "@/components/ui/button";
 
 import Footer from "./components/footer";
 import VideoContainer from "./components/video-container";
 
+const tabs = [
+	{
+		id: 1,
+		name: "Following",
+	},
+	{
+		id: 2,
+		name: "For You",
+	},
+];
+
 export default function HomePage() {
 	const [isMuted, setIsMuted] = useState<boolean>(true);
+	const [activeTab, setActiveTab] = useState<number>(2);
 
 	return (
 		<>
-			<div className="p-4 flex flex-col gap-4 w-full">
-				{/* TODO: implement navbar */}
+			<div className="p-6 flex flex-col gap-6 w-full">
 				<div className="w-full flex justify-between text-white">
-					<span>1</span>
-					<span>2</span>
-					<span>3</span>
+					<FiMenu fontSize={24} />
+					<div className="flex gap-4 items-center">
+						{tabs.map((tab) => (
+							<span
+								key={tab.id}
+								onClick={() => setActiveTab(tab.id)}
+								onKeyDown={() => setActiveTab(tab.id)}
+								tabIndex={tab.id}
+								role="button"
+								className={`transition-all ${activeTab === tab.id ? "font-medium text-white text-lg" : "text-gray-100 text-[1.05rem]"}`}
+							>
+								{tab.name}
+							</span>
+						))}
+					</div>
+					<IoSearch fontSize={24} />
 				</div>
 
 				{isMuted && (
 					<Button
 						onClick={() => setIsMuted(false)}
 						variant="outline"
-						className="w-28"
+						className="w-28 h-9"
 					>
 						<BsVolumeMuteFill fontSize={18} className="mr-1" />
 						Unmute
