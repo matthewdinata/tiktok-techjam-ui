@@ -1,7 +1,3 @@
-"use client";
-
-import { useState } from "react";
-import { BsVolumeMuteFill } from "react-icons/bs";
 import { FaCommentDots } from "react-icons/fa6";
 import { HiMusicNote } from "react-icons/hi";
 import { IoMdPerson } from "react-icons/io";
@@ -9,7 +5,6 @@ import { IoHeart } from "react-icons/io5";
 import { RiShareForwardFill } from "react-icons/ri";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 
 function VideoActionButtons() {
 	return (
@@ -41,6 +36,7 @@ type VideoContainerProps = {
 	caption: string;
 	tags?: string[];
 	music?: string;
+	muted: boolean;
 };
 
 export default function VideoContainer({
@@ -49,35 +45,24 @@ export default function VideoContainer({
 	caption,
 	tags,
 	music,
+	muted,
 }: VideoContainerProps) {
-	const [isMuted, setIsMuted] = useState<boolean>(true);
 	return (
-		<div
-			className={`w-full h-full relative p-4 flex flex-col  ${isMuted ? "justify-between" : "justify-end"}`}
-		>
+		<div className="w-full h-full relative p-4 flex flex-col justify-end">
 			{/* eslint-disable-next-line */}
 			<video
 				src={src}
-				className="z-[-1] w-full absolute top-0 left-0"
+				className="z-[-10] w-full absolute top-0 left-0"
 				// TODO: uncomment autoPlay
-				// autoPlay
-				muted={isMuted}
+				autoPlay
+				muted={muted}
 				playsInline
 				loop
 			/>
 			<div className="absolute bottom-[15%] right-3">
 				<VideoActionButtons />
 			</div>
-			{isMuted && (
-				<Button
-					onClick={() => setIsMuted(false)}
-					variant="outline"
-					className="w-28"
-				>
-					<BsVolumeMuteFill fontSize={18} className="mr-1" />
-					Unmute
-				</Button>
-			)}
+
 			<div className="text-white max-w-[70%] flex flex-col gap-1 ">
 				<div className="font-medium text-base text-[1.05rem]">
 					{name}
