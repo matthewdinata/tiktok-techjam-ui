@@ -38,6 +38,8 @@ module.exports = {
 		"react/prop-types": "off",
 		"react/require-default-props": "off",
 		"import/no-extraneous-dependencies": "off",
+		"react/jsx-no-useless-fragment": "off",
+		"react/no-array-index-key": "off",
 	},
 	overrides: [
 		{
