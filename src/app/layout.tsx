@@ -18,7 +18,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>{children}</body>
+			<body className={inter.className}>
+				{/* Set height to screen height for mobile-first design */}
+				<div className="h-screen">{children}</div>
+			</body>
 		</html>
 	);
 }
