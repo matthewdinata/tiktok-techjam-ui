@@ -6,7 +6,7 @@ export default function GoogleSignInButton({ signIn }: { signIn: () => void }) {
 	return (
 		<Button
 			variant="outline"
-			className="bg-transparent text-gray-200 hover:bg-transparent hover:text-cyan-200 hover:border-cyan-200 "
+			className="bg-transparent text-neutral-200 hover:bg-transparent hover:text-cyan-200 hover:border-cyan-200 "
 			onClick={() => signIn()}
 		>
 			Sign in with Google

@@ -11,7 +11,7 @@ function VideoActionButtons() {
 		<div className="flex flex-col text-white font-medium gap-4 text-sm shadow-sm items-center">
 			<Avatar className="mb-2 w-9 h-9">
 				<AvatarFallback>
-					<IoMdPerson fontSize={24} className="text-gray-300" />
+					<IoMdPerson fontSize={24} className="text-neutral-300" />
 				</AvatarFallback>
 			</Avatar>
 			<div className="flex flex-col items-center">
@@ -53,7 +53,7 @@ export default function VideoContainer({
 			<video
 				src={src}
 				className="z-[-10] w-full absolute top-0 left-0"
-				autoPlay
+				// autoPlay
 				muted={muted}
 				playsInline
 				loop
