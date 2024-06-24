@@ -14,7 +14,7 @@ import VideoContainer from "./components/video-container";
 const tabs = [
 	{
 		id: 1,
-		name: "Following",
+		name: "Uploads",
 	},
 	{
 		id: 2,
@@ -32,6 +32,7 @@ export default function HomePage() {
 				<div className="w-full flex justify-between text-white">
 					<BiLogOut
 						fontSize={24}
+						className="cursor-pointer"
 						onClick={async () => {
 							await signOut();
 						}}
@@ -44,7 +45,7 @@ export default function HomePage() {
 								onKeyDown={() => setActiveTab(tab.id)}
 								tabIndex={tab.id}
 								role="button"
-								className={`transition-all ${activeTab === tab.id ? "font-medium text-white text-lg" : "text-gray-100 text-[1.05rem]"}`}
+								className={`transition-all ${activeTab === tab.id ? "font-medium text-white text-lg" : "text-neutral-100 text-[1.05rem]"}`}
 							>
 								{tab.name}
 							</span>

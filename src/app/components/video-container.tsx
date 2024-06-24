@@ -11,7 +11,7 @@ function VideoActionButtons() {
 		<div className="flex flex-col text-white font-medium gap-4 text-sm shadow-sm items-center">
 			<Avatar className="mb-2 w-9 h-9">
 				<AvatarFallback>
-					<IoMdPerson fontSize={24} className="text-gray-300" />
+					<IoMdPerson fontSize={24} className="text-neutral-300" />
 				</AvatarFallback>
 			</Avatar>
 			<div className="flex flex-col items-center">
@@ -49,7 +49,7 @@ export default function VideoContainer({
 }: VideoContainerProps) {
 	return (
 		<div className="w-full h-full relative p-4 flex flex-col justify-end">
-			{/* eslint-disable-next-line */}
+			{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
 			<video
 				src={src}
 				className="z-[-10] w-full absolute top-0 left-0"
@@ -61,7 +61,6 @@ export default function VideoContainer({
 			<div className="absolute bottom-[15%] right-3">
 				<VideoActionButtons />
 			</div>
-
 			<div className="text-white max-w-[70%] flex flex-col gap-1 ">
 				<div className="font-medium text-base text-[1.05rem]">
 					{name}
