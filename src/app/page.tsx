@@ -1,8 +1,9 @@
 "use client";
 
+import { signOut } from "next-auth/react";
 import { useState } from "react";
+import { BiLogOut } from "react-icons/bi";
 import { BsVolumeMuteFill } from "react-icons/bs";
-import { FiMenu } from "react-icons/fi";
 import { IoSearch } from "react-icons/io5";
 
 import { Button } from "@/components/ui/button";
@@ -29,7 +30,12 @@ export default function HomePage() {
 		<>
 			<div className="p-6 flex flex-col gap-6 w-full">
 				<div className="w-full flex justify-between text-white">
-					<FiMenu fontSize={24} />
+					<BiLogOut
+						fontSize={24}
+						onClick={async () => {
+							await signOut();
+						}}
+					/>
 					<div className="flex gap-4 items-center">
 						{tabs.map((tab) => (
 							<span
