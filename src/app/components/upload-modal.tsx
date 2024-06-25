@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChangeEvent, useRef } from "react";
 import { FaPlus } from "react-icons/fa6";
 
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,16 @@ import {
 } from "@/components/ui/dialog";
 
 export default function UploadModal() {
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+		if (event.target.files) {
+			// const [file] = event.target.files;
+			// TODO: POST req to handle file upload
+			// console.log(file);
+		}
+	};
+
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -42,7 +53,17 @@ export default function UploadModal() {
 							by TikTok
 						</span>
 					</div>
-					<Button className="rounded-full bg-red-500 w-64 hover:bg-red-600 transition-all">
+					<input
+						type="file"
+						accept="video/*"
+						className="hidden"
+						ref={inputRef}
+						onChange={handleFileChange}
+					/>
+					<Button
+						className="rounded-full bg-red-500 w-64 hover:bg-red-600 transition-all"
+						onClick={() => inputRef.current?.click()}
+					>
 						Upload video
 					</Button>
 				</div>
