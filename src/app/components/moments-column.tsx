@@ -233,7 +233,7 @@ export default function MomentsColumn({ cards, setCards }: ColumnProps) {
 	};
 
 	return (
-		<div className="w-full shrink-0 px-20 mt-20">
+		<div className="w-full shrink-0 px-10 mt-10">
 			<div
 				onDragOver={handleDragOver}
 				onDragLeave={handleDragLeave}
