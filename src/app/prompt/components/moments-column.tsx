@@ -7,23 +7,14 @@ import { FiPlus } from "react-icons/fi";
 
 import { Button } from "@/components/ui/button";
 
-interface Card {
+export type Card = {
 	title: string;
 	id: string;
-}
+};
 
-interface CardProps {
-	title: string;
-	id: string;
-	// eslint-disable-next-line no-unused-vars
-	handleDragStart: (e: React.DragEvent<HTMLDivElement>, card: Card) => void;
-	// eslint-disable-next-line no-unused-vars
-	handleDelete: (id: string) => void;
-}
-
-interface DropIndicatorProps {
+type DropIndicatorProps = {
 	beforeId: string | null;
-}
+};
 
 function DropIndicator({ beforeId }: DropIndicatorProps) {
 	return (
@@ -33,6 +24,15 @@ function DropIndicator({ beforeId }: DropIndicatorProps) {
 		/>
 	);
 }
+
+type CardProps = {
+	title: string;
+	id: string;
+	// eslint-disable-next-line no-unused-vars
+	handleDragStart: (e: React.DragEvent<HTMLDivElement>, card: Card) => void;
+	// eslint-disable-next-line no-unused-vars
+	handleDelete: (id: string) => void;
+};
 
 function CardComponent({
 	title,
@@ -67,16 +67,16 @@ function CardComponent({
 	);
 }
 
-interface AddCardProps {
+type AddCardProps = {
 	cards: Card[];
 	setCards: React.Dispatch<React.SetStateAction<Card[]>>;
-}
+};
 
 function AddCard({ cards, setCards }: AddCardProps) {
 	const [text, setText] = useState("");
 	const [adding, setAdding] = useState(true);
 
-	const handelClose = () => {
+	const handleClose = () => {
 		if (cards.length !== 0) setAdding(false);
 	};
 
@@ -107,7 +107,7 @@ function AddCard({ cards, setCards }: AddCardProps) {
 					/>
 					<div className="mt-1.5 flex items-center justify-end gap-1.5">
 						<Button
-							onClick={handelClose}
+							onClick={handleClose}
 							className={`px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-50 bg-neutral-700 hover:bg-neutral-800 ${cards.length === 0 ? "hidden" : ""}`}
 						>
 							Close
@@ -135,10 +135,10 @@ function AddCard({ cards, setCards }: AddCardProps) {
 	);
 }
 
-interface ColumnProps {
+type ColumnProps = {
 	cards: Card[];
 	setCards: React.Dispatch<React.SetStateAction<Card[]>>;
-}
+};
 
 export default function MomentsColumn({ cards, setCards }: ColumnProps) {
 	const handleDragStart = (

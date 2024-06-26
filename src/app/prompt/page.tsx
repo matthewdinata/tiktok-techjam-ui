@@ -6,12 +6,7 @@ import { BiChevronLeft } from "react-icons/bi";
 
 import { Button } from "@/components/ui/button";
 
-import MomentsColumn from "../components/moments-column";
-
-interface Card {
-	title: string;
-	id: string;
-}
+import MomentsColumn, { type Card } from "./components/moments-column";
 
 export default function PromptPage() {
 	const [cards, setCards] = useState<Card[]>([]);
