@@ -1,8 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { BiChevronLeft } from "react-icons/bi";
-import { IoSearch } from "react-icons/io5";
 
 import { Button } from "@/components/ui/button";
 
@@ -18,10 +18,9 @@ export default function PromptPage() {
 	return (
 		<div className="bg-neutral-900 h-full flex flex-col">
 			<div className="p-6 flex flex-col gap-6 w-full">
-				<div className="w-full flex justify-between text-white">
+				<Link href="/" className="w-full flex text-white">
 					<BiChevronLeft fontSize={24} className="cursor-pointer" />
-					<IoSearch fontSize={24} />
-				</div>
+				</Link>
 			</div>
 			<div className="flex flex-col items-center mt-6">
 				<h1 className="text-2xl font-bold px-10 text-center text-white leading-8">
