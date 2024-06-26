@@ -4,13 +4,7 @@ module.exports = {
 		es2021: true,
 		node: true,
 	},
-	extends: [
-		"eslint:recommended",
-		"plugin:react/recommended",
-		"airbnb",
-		"prettier",
-		"next/core-web-vitals",
-	],
+	parser: "@typescript-eslint/parser",
 	parserOptions: {
 		ecmaFeatures: {
 			jsx: true,
@@ -18,7 +12,15 @@ module.exports = {
 		ecmaVersion: 12,
 		sourceType: "module",
 	},
-	plugins: ["react", "prettier"],
+	plugins: ["react", "prettier", "@typescript-eslint"],
+	extends: [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:react/recommended",
+		"airbnb",
+		"prettier",
+		"next/core-web-vitals",
+	],
 	rules: {
 		"prettier/prettier": "error",
 		"import/extensions": [
@@ -40,6 +42,8 @@ module.exports = {
 		"import/no-extraneous-dependencies": "off",
 		"react/jsx-no-useless-fragment": "off",
 		"react/no-array-index-key": "off",
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": ["error"],
 	},
 	overrides: [
 		{
