@@ -10,7 +10,8 @@
 		"prettier": "prettier --write .",
 		"prepare": "husky",
 		"generate": "drizzle-kit generate",
-		"migrate": "drizzle-kit migrate"
+		"migrate": "drizzle-kit migrate",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@auth/drizzle-adapter": "^1.4.1",
@@ -55,7 +56,7 @@
 		"typescript": "^5.5.2"
 	},
 	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": "npm run lint && npx tsc --noEmit",
+		"*.{js,jsx,ts,tsx}": "npm run lint",
 		"*.--write": "prettier --write"
 	}
 }

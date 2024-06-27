@@ -26,7 +26,7 @@ jobs:
               run: echo "lint_success=true" >> $GITHUB_OUTPUT
 
             - name: Run typechecking
-              run: npx tsc --noEmit
+              run: npm run typecheck
 
             - name: Set typechecking success
               run: echo "typechecking_success=true" >> $GITHUB_OUTPUT
