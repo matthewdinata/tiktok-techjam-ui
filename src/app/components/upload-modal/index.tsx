@@ -36,9 +36,10 @@ export default function UploadModal() {
 		const [file] = event.target.files ?? [];
 		if (file) {
 			if (await checkValidVideoDuration(file)) {
-				// upload file
+				// eslint-disable-next-line no-console
+				console.log("Video is valid:", file);
 			} else {
-				// setIsAlertOpen(true);
+				setIsAlertOpen(true);
 			}
 		}
 	};
@@ -85,9 +86,8 @@ export default function UploadModal() {
 							onChange={handleFileChange}
 						/>
 						<Button
-							className="rounded-full bg-red-500 w-64 hover:bg-red-600 transition-all"
-							// onClick={() => inputRef.current?.click()}
-							onClick={() => setIsAlertOpen(true)}
+							className="rounded-full bg-rose-600 w-64 hover:bg-rose-700 transition-all"
+							onClick={() => inputRef.current?.click()}
 						>
 							Upload video
 						</Button>
