@@ -28,9 +28,7 @@ function DropIndicator({ beforeId }: DropIndicatorProps) {
 type CardProps = {
 	title: string;
 	id: string;
-	// eslint-disable-next-line no-unused-vars
 	handleDragStart: (e: React.DragEvent<HTMLDivElement>, card: Card) => void;
-	// eslint-disable-next-line no-unused-vars
 	handleDelete: (id: string) => void;
 };
 

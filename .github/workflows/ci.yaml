@@ -9,7 +9,7 @@ on:
             - "*"
 
 jobs:
-    lint:
+    lint-and-typecheck:
         runs-on: ubuntu-latest
 
         steps:
@@ -24,3 +24,9 @@ jobs:
 
             - name: Set lint success
               run: echo "lint_success=true" >> $GITHUB_OUTPUT
+
+            - name: Run typechecking
+              run: npx tsc --noEmit
+
+            - name: Set typechecking success
+              run: echo "typechecking_success=true" >> $GITHUB_OUTPUT
