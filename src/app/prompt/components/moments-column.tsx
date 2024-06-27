@@ -20,7 +20,7 @@ function DropIndicator({ beforeId }: DropIndicatorProps) {
 	return (
 		<div
 			data-before={beforeId || "-1"}
-			className="my-0.5 h-0.5 w-full bg-pink-700 opacity-0"
+			className="my-0.5 h-0.5 w-full bg-rose-600 opacity-0"
 		/>
 	);
 }
@@ -101,7 +101,7 @@ function AddCard({ cards, setCards }: AddCardProps) {
 						onChange={(e) => setText(e.target.value)}
 						value={text}
 						placeholder="Add new moment..."
-						className="w-full rounded border border-pink-600 bg-pink-400/5 p-3 text-sm text-neutral-50 placeholder-neutral-500 focus:outline-0"
+						className="w-full rounded border border-rose-600 bg-rose-400/5 p-3 text-base text-neutral-50 placeholder-neutral-500 focus:outline-0"
 					/>
 					<div className="mt-1.5 flex items-center justify-end gap-1.5">
 						<Button
