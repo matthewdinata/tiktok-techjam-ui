@@ -16,7 +16,7 @@ const defaultOptions = {
 	},
 };
 
-export default function ProgressBar() {
+export default function ProgressPage() {
 	const [progress, setProgress] = useState(13);
 
 	useEffect(() => {
