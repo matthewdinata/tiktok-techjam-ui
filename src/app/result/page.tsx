@@ -1,16 +1,20 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import {
 	BiChevronLeft,
 	BiCircle,
 	BiFolder,
 	BiLock,
 	BiSolidSticker,
-	BiText,
 	BiUpload,
 } from "react-icons/bi";
 import { MdReplay } from "react-icons/md";
 
 import { Button } from "@/components/ui/button";
+
+import AddCaptionDialog from "./components/add-caption";
 
 function EditVideoButtons() {
 	return (
@@ -36,16 +40,20 @@ function EditVideoButtons() {
 }
 
 export default function ResultPage() {
+	const [caption, setCaption] = useState("");
+	const [openDialog, setOpenDialog] = useState(false);
 	return (
 		<div className="flex flex-col h-screen w-screen items-center justify-center bg-neutral-900 gap-5 py-10">
+			<AddCaptionDialog
+				open={openDialog}
+				setOpen={setOpenDialog}
+				caption={caption}
+				setCaption={setCaption}
+			/>
 			<div className="fixed top-10 flex w-full px-2 justify-between items-start">
 				<Link href="/" className="text-white">
 					<BiChevronLeft fontSize={40} className="cursor-pointer" />
 				</Link>
-				<div className="text-white bg-neutral-800 bg-opacity-90 p-2 px-3 rounded-2xl flex gap-2 items-center">
-					<BiText fontSize={20} />
-					Add caption
-				</div>
 				<EditVideoButtons />
 			</div>
 
