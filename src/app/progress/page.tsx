@@ -7,17 +7,17 @@ import Progress from "@/components/ui/progress";
 
 import * as animationData from "./movie-animation.json";
 
+const defaultOptions = {
+	loop: true,
+	autoplay: true,
+	animationData,
+	rendererSettings: {
+		preserveAspectRatio: "xMidYMid slice",
+	},
+};
+
 export default function ProgressBar() {
 	const [progress, setProgress] = useState(13);
-
-	const defaultOptions = {
-		loop: true,
-		autoplay: true,
-		animationData,
-		rendererSettings: {
-			preserveAspectRatio: "xMidYMid slice",
-		},
-	};
 
 	useEffect(() => {
 		const timer = setTimeout(() => setProgress(66), 500);
