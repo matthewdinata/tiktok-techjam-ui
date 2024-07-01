@@ -78,7 +78,7 @@ export default function UploadModal() {
 							Select up to 1 item
 						</DialogDescription>
 					</DialogHeader>
-					<Carousel className="dark">
+					<Carousel className="w-full max-w-72 sm:max-w-96">
 						<CarouselContent>
 							<CarouselItem>
 								<TemplateContainer
@@ -88,9 +88,24 @@ export default function UploadModal() {
 									buttonComponent={<TikTokHighlightsButton />}
 								/>
 							</CarouselItem>
+							<CarouselItem>
+								<TemplateContainer
+									posterSrc="/assets/jokerify-poster.jpg"
+									posterAlt="Jokerify poster"
+									creator="Rasmus"
+									buttonComponent={
+										<Button
+											className="rounded-full bg-rose-600 w-64 hover:bg-rose-700 transition-all"
+											disabled
+										>
+											Upload video
+										</Button>
+									}
+								/>
+							</CarouselItem>
 						</CarouselContent>
-						<CarouselPrevious />
-						<CarouselNext />
+						<CarouselPrevious className="focus-visible:ring-neutral-300 border-neutral-800 bg-neutral-950 hover:bg-neutral-800 hover:text-neutral-50" />
+						<CarouselNext className="focus-visible:ring-neutral-300 border-neutral-800 bg-neutral-950 hover:bg-neutral-800 hover:text-neutral-50" />
 					</Carousel>
 
 					<DialogFooter className="sm:justify-start">
