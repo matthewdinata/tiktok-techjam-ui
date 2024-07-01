@@ -82,6 +82,7 @@ export default function UploadModal() {
 						<CarouselContent>
 							<CarouselItem>
 								<TemplateContainer
+									title="Highlights"
 									posterSrc="/assets/highlights-poster.jpg"
 									posterAlt="Highlights poster"
 									creator="TikTok"
@@ -90,6 +91,7 @@ export default function UploadModal() {
 							</CarouselItem>
 							<CarouselItem>
 								<TemplateContainer
+									title="Jokerify"
 									posterSrc="/assets/jokerify-poster.jpg"
 									posterAlt="Jokerify poster"
 									creator="Rasmus"
@@ -108,7 +110,7 @@ export default function UploadModal() {
 						<CarouselNext className="focus-visible:ring-neutral-300 border-neutral-800 bg-neutral-950 hover:bg-neutral-800 hover:text-neutral-50" />
 					</Carousel>
 
-					<DialogFooter className="sm:justify-start">
+					<DialogFooter className="sm:justify-start mt-6">
 						<div className="flex flex-col items-center w-full font-medium leading-[.95rem] text-sm">
 							<div>Templates</div>
 							<div>•</div>
