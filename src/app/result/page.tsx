@@ -18,7 +18,7 @@ import AddCaptionDialog from "./components/add-caption";
 
 function EditVideoButtons() {
 	return (
-		<div className="flex flex-col text-white gap-4 text-[10px] font-medium shadow-md items-center w-10 mr-2">
+		<div className="flex flex-col text-white gap-4 text-[10px] font-medium items-center w-10 mr-2">
 			<div className="flex flex-col items-center">
 				<BiFolder fontSize={32} />
 				<span>Drafts</span>
@@ -33,7 +33,7 @@ function EditVideoButtons() {
 			</div>
 			<div className="flex flex-col items-center">
 				<BiLock fontSize={32} />
-				<span>Privacy Settings</span>
+				<span className="text-center">Privacy Settings</span>
 			</div>
 		</div>
 	);
