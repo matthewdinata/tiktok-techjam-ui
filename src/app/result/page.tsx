@@ -53,7 +53,7 @@ export default function ResultPage() {
 
 			<video src="/assets/home-vid.mp4" autoPlay muted playsInline loop />
 
-			<div className="fixed bottom-10 grid grid-cols-2 justify-center space-x-4 w-11/12">
+			<div className="fixed bottom-5 grid grid-cols-2 justify-center space-x-4 w-11/12">
 				<Button variant="secondary" size="lg">
 					Regenerate
 				</Button>

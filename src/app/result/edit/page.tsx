@@ -42,7 +42,7 @@ export default function EditPage() {
 				<div className="grid grid-row-2 gap-2">
 					<div className="grid grid-cols-3 gap-2">
 						<textarea
-							className="w-full p-2 col-span-2 text-sm focus:outline-0"
+							className="w-full p-2 col-span-2 text-base focus:outline-0"
 							placeholder="Add description..."
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
@@ -83,20 +83,12 @@ export default function EditPage() {
 
 				<EditItems />
 
-				<div className="mt-auto flex space-x-4 mb-4">
-					<Button
-						size="lg"
-						className="flex-1"
-						disabled
-						variant="secondary"
-					>
+				<div className="fixed bottom-5 grid grid-cols-2 justify-center space-x-4 w-11/12">
+					<Button variant="secondary" size="lg" disabled>
 						<BiBox className="mr-2" />
 						Drafts
 					</Button>
-					<Button
-						size="lg"
-						className="flex-1 bg-rose-600 focus:bg-rose-700 text-white rounded"
-					>
+					<Button className="bg-rose-600 focus:bg-rose-700" size="lg">
 						<BiUpload className="mr-2" />
 						Post
 					</Button>
