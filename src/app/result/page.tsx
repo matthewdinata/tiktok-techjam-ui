@@ -1,20 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
 	BiChevronLeft,
 	BiCircle,
 	BiFolder,
 	BiLock,
 	BiSolidSticker,
-	BiUpload,
 } from "react-icons/bi";
-import { MdReplay } from "react-icons/md";
+import { IoMusicalNotes } from "react-icons/io5";
 
 import { Button } from "@/components/ui/button";
-
-import AddCaptionDialog from "./components/add-caption";
 
 function EditVideoButtons() {
 	return (
@@ -40,16 +37,13 @@ function EditVideoButtons() {
 }
 
 export default function ResultPage() {
-	const [caption, setCaption] = useState("");
-	const [openDialog, setOpenDialog] = useState(false);
+	const router = useRouter();
 	return (
 		<div className="flex flex-col h-screen w-screen items-center justify-center bg-neutral-900 gap-5 py-10">
-			<AddCaptionDialog
-				open={openDialog}
-				setOpen={setOpenDialog}
-				caption={caption}
-				setCaption={setCaption}
-			/>
+			<div className="text-white bg-neutral-800 bg-opacity-90 p-2 px-3 rounded-2xl flex gap-2 items-center fixed z-50 top-10">
+				<IoMusicalNotes fontSize={20} />
+				Add sound
+			</div>
 			<div className="fixed top-10 flex w-full px-2 justify-between items-start">
 				<Link href="/" className="text-white">
 					<BiChevronLeft fontSize={40} className="cursor-pointer" />
@@ -59,14 +53,18 @@ export default function ResultPage() {
 
 			<video src="/assets/home-vid.mp4" autoPlay muted playsInline loop />
 
-			<div className="fixed bottom-10 flex justify-center gap-5">
-				<Button variant="secondary">
-					<MdReplay fontSize={20} className="mr-3" />
+			<div className="fixed bottom-10 grid grid-cols-2 justify-center space-x-4 w-11/12">
+				<Button variant="secondary" size="lg">
 					Regenerate
 				</Button>
-				<Button className="bg-rose-600">
-					<BiUpload fontSize={20} className="mr-3" />
-					Post to feed
+				<Button
+					className="bg-rose-600 focus:bg-rose-700"
+					size="lg"
+					onClick={() => {
+						router.push("/result/edit");
+					}}
+				>
+					Next
 				</Button>
 			</div>
 		</div>
