@@ -34,7 +34,7 @@ export default function EditPage() {
 
 	return (
 		<div className="h-screen w-screen bg-neutral-900">
-			<div className="max-w-md mx-auto p-4 bg-white h-full flex flex-col">
+			<div className="max-w-md mx-auto p-4 bg-white h-screen flex flex-col relative">
 				<Link href="/result" className="w-full flex my-6">
 					<BiChevronLeft fontSize={24} className="cursor-pointer" />
 				</Link>
@@ -83,7 +83,7 @@ export default function EditPage() {
 
 				<EditItems />
 
-				<div className="fixed bottom-5 grid grid-cols-2 justify-center space-x-4 w-11/12">
+				<div className="fixed bottom-5 grid grid-cols-2 justify-center space-x-4 w-11/12 md:max-w-[26rem]">
 					<Button variant="secondary" size="lg" disabled>
 						<BiBox className="mr-2" />
 						Drafts
