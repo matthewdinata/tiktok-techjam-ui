@@ -33,11 +33,16 @@ export default function EditPage() {
 	}, []);
 
 	return (
-		<div className="h-screen w-screen bg-neutral-900">
+		<div className="h-full w-full bg-neutral-900">
 			<div className="max-w-md mx-auto p-4 bg-white h-screen flex flex-col relative">
-				<Link href="/result" className="w-full flex my-6">
-					<BiChevronLeft fontSize={24} className="cursor-pointer" />
-				</Link>
+				<div className="w-full flex my-6">
+					<Link href="/result">
+						<BiChevronLeft
+							fontSize={24}
+							className="cursor-pointer"
+						/>
+					</Link>
+				</div>
 
 				<div className="grid grid-row-2 gap-2">
 					<div className="grid grid-cols-3 gap-2">
