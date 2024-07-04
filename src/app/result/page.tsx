@@ -46,11 +46,15 @@ export default function ResultPage() {
 			/>
 
 			<div className="fixed bottom-5 grid grid-cols-2 justify-center space-x-4 w-11/12 md:max-w-[26rem]">
-				<Button variant="secondary" size="lg">
+				<Button
+					variant="secondary"
+					size="lg"
+					className="bg-slate-100 hover:bg-rose-200 focus:bg-rose-200"
+				>
 					Regenerate
 				</Button>
 				<Button
-					className="bg-rose-600 focus:bg-rose-700"
+					className="bg-rose-600 hover:bg-rose-700 focus:bg-rose-700"
 					size="lg"
 					onClick={() => {
 						router.push("/result/edit");

@@ -88,7 +88,10 @@ export default function EditPage() {
 						<BiBox className="mr-2" />
 						Drafts
 					</Button>
-					<Button className="bg-rose-600 focus:bg-rose-700" size="lg">
+					<Button
+						className="bg-rose-600 hover:bg-rose-700 focus:bg-rose-700"
+						size="lg"
+					>
 						<BiUpload className="mr-2" />
 						Post
 					</Button>
