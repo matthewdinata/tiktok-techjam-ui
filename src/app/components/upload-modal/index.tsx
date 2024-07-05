@@ -69,8 +69,8 @@ export default function UploadModal() {
 						<FaPlus fontSize={18} />
 					</div>
 				</DialogTrigger>
-				<DialogContent className="w-full h-full flex flex-col justify-between items-center bg-neutral-950 text-white border-black">
-					<DialogHeader className="mt-10 flex flex-col items-center">
+				<DialogContent className="w-full max-w-md h-dvh flex flex-col py-10 justify-between items-center bg-neutral-950 text-white border-black">
+					<DialogHeader className="flex flex-col items-center">
 						<DialogTitle className="text-2xl">
 							TikTok Creator Template
 						</DialogTitle>
@@ -78,7 +78,7 @@ export default function UploadModal() {
 							Select up to 1 item
 						</DialogDescription>
 					</DialogHeader>
-					<Carousel className="w-full max-w-72 sm:max-w-96">
+					<Carousel className="w-full max-w-64">
 						<CarouselContent>
 							<CarouselItem>
 								<TemplateContainer

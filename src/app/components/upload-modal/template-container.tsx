@@ -18,7 +18,7 @@ export default function TemplateContainer({
 		<div className="flex flex-col gap-6 items-center">
 			<div className="flex flex-col items-center gap-3">
 				<div className="text-lg font-semibold">{title}</div>
-				<div className="w-64 h-96 border-neutral-800 border-2 rounded-md">
+				<div className="w-52 h-80 border-neutral-800 border-2 rounded-md">
 					<Image
 						src={posterSrc}
 						width={500}

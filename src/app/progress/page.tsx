@@ -25,7 +25,7 @@ export default function ProgressPage() {
 	}, []);
 
 	return (
-		<div className="h-screen bg-neutral-900 flex flex-col items-center justify-center pb-20">
+		<div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center pb-20">
 			<Lottie options={defaultOptions} height={300} width={300} />
 			<span className="text-lg font-semibold text-white">
 				Processing your highlight video

@@ -19,7 +19,7 @@ export default function ResultPage() {
 	};
 
 	return (
-		<div className="flex flex-col h-screen w-screen items-center justify-center bg-neutral-900 gap-5 py-10">
+		<div className="flex flex-col h-full w-full items-center justify-center bg-neutral-900 gap-5 py-10">
 			<div className="text-white bg-neutral-800 bg-opacity-90 p-2 px-3 rounded-2xl flex gap-2 items-center fixed top-10">
 				<IoMusicalNotes fontSize={20} />
 				Add sound
@@ -42,7 +42,6 @@ export default function ResultPage() {
 				muted={isMuted}
 				playsInline
 				loop
-				className="md:max-w-md"
 			/>
 
 			<div className="fixed bottom-5 grid grid-cols-2 justify-center space-x-4 w-11/12 md:max-w-[26rem]">
