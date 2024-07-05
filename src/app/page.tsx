@@ -32,16 +32,16 @@ const forYouVideos = [
 		id: "1",
 		src: "/assets/home-vid.mp4",
 		name: "Mr. Do You Know?",
-		caption: "air fryer users are the worst people on earth 🤷‍♂️",
-		tags: ["#airfryer", "#comedy"],
+		caption:
+			"air fryer users are the worst people on earth 🤷‍♂️ #airfryer #comedy",
 		music: "original sound - Mr. Do You Know?",
 	},
 	{
 		id: "2",
 		src: "/assets/home-vid2.mp4",
 		name: "Under Paris",
-		caption: "we are fully prepared for the zombie apocalypse",
-		tags: ["#paris", "#shark"],
+		caption:
+			"we are fully prepared for the zombie apocalypse #paris #shark",
 		music: "original sound - Mr. Do You Know?",
 	},
 ];
@@ -51,16 +51,16 @@ const uploadsVideos = [
 		id: "4",
 		src: "/assets/home-vid2.mp4",
 		name: "Under Paris",
-		caption: "we are fully prepared for the zombie apocalypse",
-		tags: ["#paris", "#shark"],
+		caption:
+			"we are fully prepared for the zombie apocalypse #paris #shark",
 		music: "original sound - Mr. Do You Know?",
 	},
 	{
 		id: "3",
 		src: "/assets/home-vid.mp4",
 		name: "Mr. Do You Know?",
-		caption: "air fryer users are the worst people on earth 🤷‍♂️",
-		tags: ["#airfryer", "#comedy"],
+		caption:
+			"air fryer users are the worst people on earth 🤷‍♂️ #airfryer #comedy",
 		music: "original sound - Mr. Do You Know?",
 	},
 ];
@@ -73,7 +73,7 @@ export default function HomePage() {
 
 	return (
 		<>
-			<div className="flex flex-col w-full overflow-scroll pb-16">
+			<div className="flex flex-col w-full h-full pb-16">
 				<div className="w-full flex flex-col text-white px-4 fixed max-w-md top-5 z-20 gap-4">
 					<div className="flex justify-between">
 						<BiLogOut
@@ -125,7 +125,6 @@ export default function HomePage() {
 									src={video.src}
 									name={video.name}
 									caption={video.caption}
-									tags={video.tags}
 									music={video.music}
 									muted={isMuted}
 								/>

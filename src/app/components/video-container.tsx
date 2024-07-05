@@ -7,6 +7,8 @@ import { RiShareForwardFill } from "react-icons/ri";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
+import Caption from "./caption";
+
 function VideoActionButtons() {
 	return (
 		<div className="flex flex-col text-white font-medium gap-4 text-sm shadow-sm items-center">
@@ -36,7 +38,6 @@ type VideoContainerProps = {
 	src: string;
 	name: string;
 	caption: string;
-	tags?: string[];
 	music?: string;
 	muted: boolean;
 };
@@ -46,7 +47,6 @@ export default function VideoContainer({
 	src,
 	name,
 	caption,
-	tags,
 	music,
 	muted,
 }: VideoContainerProps) {
@@ -91,14 +91,7 @@ export default function VideoContainer({
 				<div className="font-medium text-base text-[1.05rem]">
 					{name}
 				</div>
-				<div className="font-light leading-5">
-					{caption}{" "}
-					{tags?.map((tag, idx) => (
-						<span key={idx} className="font-medium">
-							{tag}{" "}
-						</span>
-					))}
-				</div>
+				<Caption text={caption} />
 				{music && (
 					<div className="flex items-center mt-1">
 						<HiMusicNote fontSize={16} className="mr-2" />
