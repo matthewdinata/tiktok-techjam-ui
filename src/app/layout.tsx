@@ -20,7 +20,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={inter.className}>
 				{/* Set height to screen height for mobile-first design */}
-				<div className="h-screen w-screen bg-neutral-900">
+				<div className="h-screen w-screen bg-neutral-800">
 					<div className="max-w-md w-full h-full mx-auto bg-neutral-900 relative">
 						{children}
 					</div>
