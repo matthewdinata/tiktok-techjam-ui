@@ -8,8 +8,8 @@ import { BiBox, BiChevronLeft, BiUpload } from "react-icons/bi";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-import EditItems from "./components/edit-items";
-import { captureVideoFrame } from "./utils";
+import EditItems from "../components/edit-items";
+import { captureVideoFrame } from "../utils";
 
 export default function EditPage() {
 	const [description, setDescription] = useState<string>("");

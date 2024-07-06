@@ -13,7 +13,7 @@ import {
 	CarouselItem,
 } from "@/components/ui/carousel";
 
-import { useUserVideos, useVideos } from "./api/videos/use-videos";
+import { useUserVideos, useVideos } from "../hooks/use-videos";
 import Footer from "./components/footer";
 import Loading from "./components/loading/loading";
 import VideoContainer from "./components/video-container";

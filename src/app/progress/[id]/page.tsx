@@ -5,7 +5,7 @@ import Lottie from "react-lottie";
 
 import Progress from "@/components/ui/progress";
 
-import { useHighlightStatus } from "../../api/highlights/use-highlights";
+import { useHighlightStatus } from "../../../hooks/use-highlights";
 import * as animationData from "../movie-animation.json";
 
 const defaultOptions = {
@@ -18,8 +18,8 @@ const defaultOptions = {
 };
 
 export default function ProgressPage() {
-	const params = useParams<{ taskId: string }>();
-	const { data: progress } = useHighlightStatus(params.taskId);
+	const params = useParams<{ id: string }>();
+	const { data: progress } = useHighlightStatus(params.id);
 
 	return (
 		<div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center pb-20">

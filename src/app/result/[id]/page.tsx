@@ -1,18 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { BiChevronLeft } from "react-icons/bi";
 import { IoMusicalNotes } from "react-icons/io5";
 
+import { useHighlightResults } from "@/hooks/use-highlights";
+
 import { Button } from "@/components/ui/button";
 
-import ActionButtons from "./components/action-buttons";
+import ActionButtons from "../components/action-buttons";
 
 export default function ResultPage() {
 	const router = useRouter();
 	const [isMuted, setIsMuted] = useState<boolean>(true);
+	const params = useParams<{ id: string }>();
+
+	const { data: result } = useHighlightResults(params.id);
 
 	const toggleIsMuted = () => {
 		setIsMuted(!isMuted);
@@ -37,7 +42,7 @@ export default function ResultPage() {
 
 			{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
 			<video
-				src="/assets/home-vid.mp4"
+				src={result?.videoUrl}
 				autoPlay
 				muted={isMuted}
 				playsInline
