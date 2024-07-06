@@ -16,7 +16,7 @@ export function useVideos() {
 		queryKey: queryKeys.videos.all,
 		queryFn: async () => {
 			const response = await apiClient.get("videos");
-			return response.data as number;
+			return response.data as VideoType[];
 		},
 	});
 }
@@ -27,7 +27,7 @@ export function useUserVideos(userId: string) {
 		queryKey: queryKeys.videos.byUser(userId),
 		queryFn: async () => {
 			const response = await apiClient.get(`videos?user=${userId}`);
-			return response.data as number;
+			return response.data as VideoType[];
 		},
 	});
 }
