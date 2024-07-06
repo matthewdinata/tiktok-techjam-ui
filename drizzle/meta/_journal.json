@@ -22,6 +22,13 @@
       "when": 1720252068677,
       "tag": "0002_tiresome_puppet_master",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1720282067640,
+      "tag": "0003_chilly_amphibian",
+      "breakpoints": true
     }
   ]
 }
