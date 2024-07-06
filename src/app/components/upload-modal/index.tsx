@@ -1,5 +1,8 @@
-import React, { ChangeEvent, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
+
+import { useFile } from "@/lib/context";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -26,13 +29,17 @@ import { checkValidVideoDuration } from "./utils";
 function TikTokHighlightsButton() {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [isAlertOpen, setIsAlertOpen] = useState<boolean>(false);
+	const { setFile } = useFile();
+	const router = useRouter();
 
 	const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
 		const [file] = event.target.files ?? [];
 		if (file) {
 			if (await checkValidVideoDuration(file)) {
+				setFile(file);
 				// eslint-disable-next-line no-console
 				console.log("Video is valid:", file);
+				router.push("/prompt");
 			} else {
 				setIsAlertOpen(true);
 			}

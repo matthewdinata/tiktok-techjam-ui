@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 import { queryKeys } from "./query-keys";
 import { useAuthApiClient } from "./use-auth-api-client";
@@ -13,11 +14,13 @@ interface UploadHighlightParams {
 
 export function useUploadHighlight() {
 	const apiClient = useAuthApiClient();
+	const router = useRouter();
+
 	return useMutation({
 		mutationFn: async ({ file, prompt }: UploadHighlightParams) => {
 			const formData = new FormData();
 			formData.append("file", file);
-			prompt.forEach((p) => formData.append("prompt[]", p));
+			prompt.forEach((p) => formData.append("prompt", p));
 
 			const response = await apiClient.post(
 				"highlights/upload",
@@ -26,7 +29,10 @@ export function useUploadHighlight() {
 					headers: { "Content-Type": "multipart/form-data" },
 				}
 			);
-			return response.data.taskId as string;
+			return response.data as string;
+		},
+		onSuccess: (data: string | undefined) => {
+			router.push(`/progress/${data}`);
 		},
 	});
 }
