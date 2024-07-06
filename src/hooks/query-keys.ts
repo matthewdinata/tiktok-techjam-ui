@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
-export const queryKeys = {
+const queryKeys = {
 	videos: {
 		all: ["videos"],
 		byUser: (userId: string) => ["videos", "user", userId],
@@ -9,3 +8,5 @@ export const queryKeys = {
 		results: (taskId: string) => ["highlights", "results", taskId],
 	},
 };
+
+export default queryKeys;

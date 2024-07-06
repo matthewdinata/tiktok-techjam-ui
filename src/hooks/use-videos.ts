@@ -5,8 +5,8 @@ import { InferSelectModel } from "drizzle-orm";
 
 import videos from "@/db/schema/videos";
 
-import { queryKeys } from "./query-keys";
-import { useAuthApiClient } from "./use-auth-api-client";
+import queryKeys from "./query-keys";
+import useAuthApiClient from "./use-auth-api-client";
 
 export type VideoType = InferSelectModel<typeof videos>;
 

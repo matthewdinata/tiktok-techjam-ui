@@ -3,8 +3,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
-import { queryKeys } from "./query-keys";
-import { useAuthApiClient } from "./use-auth-api-client";
+import queryKeys from "./query-keys";
+import useAuthApiClient from "./use-auth-api-client";
 import { VideoType } from "./use-videos";
 
 interface UploadHighlightParams {

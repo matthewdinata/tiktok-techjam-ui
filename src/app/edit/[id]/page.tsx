@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 import EditItems from "../components/edit-items";
-import { captureVideoFrame } from "../utils";
+import captureVideoFrame from "../utils";
 
 export default function EditPage() {
 	const [description, setDescription] = useState<string>("");

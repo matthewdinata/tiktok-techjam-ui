@@ -14,5 +14,4 @@ const captureVideoFrame = (videoRef: RefObject<HTMLVideoElement>) => {
 	return null;
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { captureVideoFrame };
+export default captureVideoFrame;

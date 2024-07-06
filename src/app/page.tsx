@@ -15,7 +15,7 @@ import {
 
 import { useUserVideos, useVideos } from "../hooks/use-videos";
 import Footer from "./components/footer";
-import Loading from "./components/loading/loading";
+import Loading from "./components/loading";
 import VideoContainer from "./components/video-container";
 
 const tabs = [

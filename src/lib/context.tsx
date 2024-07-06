@@ -11,7 +11,6 @@ export const FileContext = createContext<FileContextType | undefined>(
 	undefined
 );
 
-// eslint-disable-next-line import/prefer-default-export
 export const useFile = () => {
 	const context = useContext(FileContext);
 	if (!context) {

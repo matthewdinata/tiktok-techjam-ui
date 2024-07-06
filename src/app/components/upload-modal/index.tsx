@@ -25,7 +25,7 @@ import {
 
 import DurationAlert from "./duration-alert";
 import TemplateContainer from "./template-container";
-import { checkValidVideoDuration } from "./utils";
+import checkValidVideoDuration from "./utils";
 
 function TikTokHighlightsButton() {
 	const inputRef = useRef<HTMLInputElement>(null);
