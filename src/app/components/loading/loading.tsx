@@ -16,7 +16,7 @@ const defaultOptions = {
 export default function Loading() {
 	return (
 		<div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center pb-20">
-			<Lottie options={defaultOptions} height={300} width={300} />
+			<Lottie options={defaultOptions} height={200} width={200} />
 			<span className="text-lg font-semibold text-white">
 				Hold on, we&apos;re getting your videos...
 			</span>

@@ -1,6 +1,7 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import Lottie from "react-lottie";
 
 import Progress from "@/components/ui/progress";
@@ -18,8 +19,15 @@ const defaultOptions = {
 };
 
 export default function ProgressPage() {
-	const params = useParams<{ id: string }>();
-	const { data: progress } = useHighlightStatus(params.id);
+	const { id } = useParams<{ id: string }>();
+	const { data: progress } = useHighlightStatus(id);
+	const router = useRouter();
+
+	useEffect(() => {
+		if (progress === 100) {
+			router.push(`/result/${id}`);
+		}
+	}, [progress, id, router]);
 
 	return (
 		<div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center pb-20">
@@ -27,7 +35,10 @@ export default function ProgressPage() {
 			<span className="text-lg font-semibold text-white">
 				Processing your highlight video
 			</span>
-			<Progress value={progress} className="w-[60%] mt-2 bg-white" />
+			<Progress
+				value={Number(progress)}
+				className="w-[60%] mt-2 bg-white"
+			/>
 		</div>
 	);
 }

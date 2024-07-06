@@ -43,10 +43,14 @@ export function useHighlightStatus(taskId: string) {
 		queryKey: queryKeys.highlights.status(taskId),
 		queryFn: async () => {
 			const response = await apiClient.get(`highlights/${taskId}/status`);
-			return response.data as number;
+			return Number(response.data);
 		},
 		enabled: !!taskId,
-		refetchInterval: 500,
+		refetchInterval: (query) => {
+			const progress = query.state.data;
+			if (progress === 100) return false;
+			return 500;
+		},
 	});
 }
 export function useHighlightResults(taskId: string) {
