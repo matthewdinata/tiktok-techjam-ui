@@ -24,7 +24,7 @@ export default function ResultPage() {
 				<IoMusicalNotes fontSize={20} />
 				Add sound
 			</div>
-			<div className="fixed top-10 flex w-full justify-between items-start px-2 md:px-0 md:max-w-[26rem] z-10">
+			<div className="fixed top-10 w-full flex justify-between items-start px-2 max-w-md z-10">
 				<Link href="/" className="text-white">
 					<BiChevronLeft fontSize={40} className="cursor-pointer" />
 				</Link>
@@ -44,7 +44,7 @@ export default function ResultPage() {
 				loop
 			/>
 
-			<div className="fixed bottom-5 grid grid-cols-2 justify-center space-x-4 w-11/12 md:max-w-[26rem]">
+			<div className="fixed bottom-5 grid grid-cols-2 justify-center space-x-4 w-full px-4 max-w-[26rem]">
 				<Button
 					variant="secondary"
 					size="lg"
