@@ -99,7 +99,7 @@ export default function HomePage() {
 										key={video.id}
 										id={video.id}
 										src={video.videoUrl}
-										name={video.username}
+										name={video.name}
 										caption={video.caption}
 										music={video.music}
 										muted={isMuted}
