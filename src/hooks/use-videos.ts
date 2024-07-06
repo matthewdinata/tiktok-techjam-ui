@@ -8,7 +8,9 @@ import videos from "@/db/schema/videos";
 import queryKeys from "./query-keys";
 import useAuthApiClient from "./use-auth-api-client";
 
-export type VideoType = InferSelectModel<typeof videos>;
+export type VideoType = InferSelectModel<typeof videos> & {
+	name: string;
+};
 
 export function useVideos() {
 	const apiClient = useAuthApiClient();
