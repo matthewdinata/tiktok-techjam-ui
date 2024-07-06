@@ -37,8 +37,8 @@ type VideoContainerProps = {
 	id: string;
 	src: string;
 	name: string;
-	caption: string;
-	music?: string;
+	caption: string | null;
+	music: string | null;
 	muted: boolean;
 };
 
@@ -91,7 +91,7 @@ export default function VideoContainer({
 				<div className="font-medium text-base text-[1.05rem]">
 					{name}
 				</div>
-				<Caption text={caption} />
+				{caption && <Caption text={caption} />}
 				{music && (
 					<div className="flex items-center mt-1">
 						<HiMusicNote fontSize={16} className="mr-2" />

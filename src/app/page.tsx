@@ -13,7 +13,9 @@ import {
 	CarouselItem,
 } from "@/components/ui/carousel";
 
+import { useUserVideos, useVideos } from "./api/videos/use-videos";
 import Footer from "./components/footer";
+import Loading from "./components/loading/loading";
 import VideoContainer from "./components/video-container";
 
 const tabs = [
@@ -27,47 +29,16 @@ const tabs = [
 	},
 ];
 
-const forYouVideos = [
-	{
-		id: "1",
-		src: "/assets/home-vid.mp4",
-		name: "Mr. Do You Know?",
-		caption:
-			"air fryer users are the worst people on earth 🤷‍♂️ #airfryer #comedy",
-		music: "original sound - Mr. Do You Know?",
-	},
-	{
-		id: "2",
-		src: "/assets/home-vid2.mp4",
-		name: "Under Paris",
-		caption:
-			"we are fully prepared for the zombie apocalypse #paris #shark",
-		music: "original sound - Mr. Do You Know?",
-	},
-];
-
-const uploadsVideos = [
-	{
-		id: "4",
-		src: "/assets/home-vid2.mp4",
-		name: "Under Paris",
-		caption:
-			"we are fully prepared for the zombie apocalypse #paris #shark",
-		music: "original sound - Mr. Do You Know?",
-	},
-	{
-		id: "3",
-		src: "/assets/home-vid.mp4",
-		name: "Mr. Do You Know?",
-		caption:
-			"air fryer users are the worst people on earth 🤷‍♂️ #airfryer #comedy",
-		music: "original sound - Mr. Do You Know?",
-	},
-];
-
 export default function HomePage() {
 	const [isMuted, setIsMuted] = useState<boolean>(true);
 	const [activeTab, setActiveTab] = useState<number>(2);
+	const userId = "user2";
+
+	const { data: forYouVideos, isLoading: forYouLoading } = useVideos();
+	const { data: uploadsVideos, isLoading: uploadsLoading } =
+		useUserVideos(userId);
+
+	if (uploadsLoading || forYouLoading) return <Loading />;
 
 	const videos = activeTab === 1 ? uploadsVideos : forYouVideos;
 
@@ -115,21 +86,26 @@ export default function HomePage() {
 						align: "start",
 					}}
 					orientation="vertical"
+					key={activeTab}
 				>
 					<CarouselContent className="h-dvh mt-0 relative">
-						{videos.map((video) => (
-							<CarouselItem key={video.id} className="h-dvh pt-0">
-								<VideoContainer
+						{videos &&
+							videos.map((video) => (
+								<CarouselItem
 									key={video.id}
-									id={video.id}
-									src={video.src}
-									name={video.name}
-									caption={video.caption}
-									music={video.music}
-									muted={isMuted}
-								/>
-							</CarouselItem>
-						))}
+									className="h-dvh pt-0"
+								>
+									<VideoContainer
+										key={video.id}
+										id={video.id}
+										src={video.videoUrl}
+										name={video.username}
+										caption={video.caption}
+										music={video.music}
+										muted={isMuted}
+									/>
+								</CarouselItem>
+							))}
 					</CarouselContent>
 				</Carousel>
 			</div>
