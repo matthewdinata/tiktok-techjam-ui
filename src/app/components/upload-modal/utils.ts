@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
-export const checkValidVideoDuration = (videoFile: File): Promise<boolean> =>
+const checkValidVideoDuration = (videoFile: File): Promise<boolean> =>
 	new Promise((resolve) => {
 		const video = document.createElement("video");
 		video.preload = "metadata";
@@ -11,3 +10,5 @@ export const checkValidVideoDuration = (videoFile: File): Promise<boolean> =>
 
 		video.src = URL.createObjectURL(videoFile);
 	});
+
+export default checkValidVideoDuration;

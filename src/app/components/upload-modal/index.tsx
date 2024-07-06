@@ -1,5 +1,9 @@
-import React, { ChangeEvent, useRef, useState } from "react";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
+
+import { useFile } from "@/lib/context";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -21,22 +25,27 @@ import {
 
 import DurationAlert from "./duration-alert";
 import TemplateContainer from "./template-container";
-import { checkValidVideoDuration } from "./utils";
+import checkValidVideoDuration from "./utils";
 
 function TikTokHighlightsButton() {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [isAlertOpen, setIsAlertOpen] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const { setFile } = useFile();
+	const router = useRouter();
 
 	const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+		setIsLoading(true);
 		const [file] = event.target.files ?? [];
 		if (file) {
 			if (await checkValidVideoDuration(file)) {
-				// eslint-disable-next-line no-console
-				console.log("Video is valid:", file);
+				setFile(file);
+				router.push("/prompt");
 			} else {
 				setIsAlertOpen(true);
 			}
 		}
+		setIsLoading(false);
 	};
 
 	return (
@@ -53,7 +62,11 @@ function TikTokHighlightsButton() {
 			<Button
 				className="rounded-full bg-rose-600 w-64 hover:bg-rose-700 transition-all"
 				onClick={() => inputRef.current?.click()}
+				disabled={isLoading}
 			>
+				{isLoading && (
+					<ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+				)}
 				Upload video
 			</Button>
 		</>

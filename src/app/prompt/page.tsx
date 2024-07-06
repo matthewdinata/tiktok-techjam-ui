@@ -1,8 +1,12 @@
 "use client";
 
+import { ReloadIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { useState } from "react";
 import { BiChevronLeft } from "react-icons/bi";
+
+import { useUploadHighlight } from "@/hooks/use-highlights";
+import { useFile } from "@/lib/context";
 
 import { Button } from "@/components/ui/button";
 
@@ -10,6 +14,16 @@ import MomentsColumn, { type Card } from "./components/moments-column";
 
 export default function PromptPage() {
 	const [cards, setCards] = useState<Card[]>([]);
+	const { mutate, isPending } = useUploadHighlight();
+	const { file } = useFile();
+
+	const handleUpload = () => {
+		if (!file) return;
+		mutate({
+			file,
+			prompt: [...cards.map((card) => card.title)],
+		});
+	};
 	return (
 		<div className="bg-neutral-900 h-full flex flex-col pb-20 no-scrollbar overflow-y-auto">
 			<div className="p-6 flex flex-col gap-6 w-full">
@@ -26,7 +40,12 @@ export default function PromptPage() {
 			<div className="fixed bottom-10 w-full flex justify-center max-w-md">
 				<Button
 					className={`bg-rose-600 hover:bg-rose-700 focus:bg-rose-700 w-4/5 mt-5 ${cards.length === 0 ? "hidden" : ""}`}
+					onClick={handleUpload}
+					disabled={isPending}
 				>
+					{isPending && (
+						<ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+					)}
 					Next
 				</Button>
 			</div>

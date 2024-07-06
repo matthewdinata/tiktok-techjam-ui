@@ -8,12 +8,13 @@ import { BiBox, BiChevronLeft, BiUpload } from "react-icons/bi";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-import EditItems from "./components/edit-items";
-import { captureVideoFrame } from "./utils";
+import EditItems from "../components/edit-items";
+import captureVideoFrame from "../utils";
 
 export default function EditPage() {
 	const [description, setDescription] = useState<string>("");
 	const [coverImage, setCoverImage] = useState<string | null>(null);
+	const [music, setMusic] = useState<string | null>(null);
 	const videoRef = useRef<HTMLVideoElement>(null);
 
 	useEffect(() => {
@@ -86,9 +87,9 @@ export default function EditPage() {
 				</div>
 				<Separator className="my-4" />
 
-				<EditItems />
+				<EditItems music={music} setMusic={setMusic} />
 
-				<div className="fixed bottom-5 grid grid-cols-2 justify-center space-x-4 w-11/12 md:max-w-[26rem]">
+				<div className="fixed bottom-5 grid grid-cols-2 justify-center space-x-4 w-11/12 max-w-[26rem]">
 					<Button variant="secondary" size="lg" disabled>
 						<BiBox className="mr-2" />
 						Drafts

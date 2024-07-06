@@ -10,6 +10,8 @@ import {
 import { FaLink, FaLocationArrow } from "react-icons/fa";
 import { FaEarthAmericas, FaShare } from "react-icons/fa6";
 
+import AddMusic from "./add-music";
+
 function SocialMediaIcons() {
 	return (
 		<div className="flex gap-2">
@@ -29,15 +31,25 @@ function SocialMediaIcons() {
 	);
 }
 
-export default function EditItems() {
+export default function EditItems({
+	music,
+	setMusic,
+}: {
+	music: string | null;
+	setMusic: (value: string | null) => void;
+}) {
 	return (
 		<>
-			<div className="flex items-center justify-between p-2">
-				<div className="flex items-center">
-					<FaLocationArrow className="mr-3" />
-					<span>Location</span>
+			<AddMusic music={music} setMusic={setMusic} />
+
+			<div className="mt-4">
+				<div className="flex items-center justify-between p-2">
+					<div className="flex items-center">
+						<FaLocationArrow className="mr-3" />
+						<span>Location</span>
+					</div>
+					<BiChevronRight />
 				</div>
-				<BiChevronRight />
 			</div>
 
 			<div className="mt-4">

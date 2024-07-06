@@ -1,18 +1,24 @@
 "use client";
 
+import { ReloadIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import { BiChevronLeft } from "react-icons/bi";
-import { IoMusicalNotes } from "react-icons/io5";
+import { BiChevronLeft, BiText } from "react-icons/bi";
+
+import { useHighlightResults } from "@/hooks/use-highlights";
 
 import { Button } from "@/components/ui/button";
 
-import ActionButtons from "./components/action-buttons";
+import ActionButtons from "../components/action-buttons";
 
 export default function ResultPage() {
 	const router = useRouter();
 	const [isMuted, setIsMuted] = useState<boolean>(true);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const { id } = useParams<{ id: string }>();
+
+	const { data: result } = useHighlightResults(id);
 
 	const toggleIsMuted = () => {
 		setIsMuted(!isMuted);
@@ -21,8 +27,8 @@ export default function ResultPage() {
 	return (
 		<div className="flex flex-col h-full w-full items-center justify-center bg-neutral-900 gap-5 py-10">
 			<div className="text-white bg-neutral-800 bg-opacity-90 p-2 px-3 rounded-2xl flex gap-2 items-center fixed top-10">
-				<IoMusicalNotes fontSize={20} />
-				Add sound
+				<BiText fontSize={20} />
+				Add text
 			</div>
 			<div className="fixed top-10 w-full flex justify-between items-start px-2 max-w-md z-10">
 				<Link href="/" className="text-white">
@@ -37,7 +43,7 @@ export default function ResultPage() {
 
 			{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
 			<video
-				src="/assets/home-vid.mp4"
+				src={result?.videoUrl}
 				autoPlay
 				muted={isMuted}
 				playsInline
@@ -53,12 +59,17 @@ export default function ResultPage() {
 					Regenerate
 				</Button>
 				<Button
+					disabled={isLoading}
 					className="bg-rose-600 hover:bg-rose-700 focus:bg-rose-700"
 					size="lg"
 					onClick={() => {
-						router.push("/result/edit");
+						router.push(`/edit/${id}`);
+						setIsLoading(true);
 					}}
 				>
+					{isLoading && (
+						<ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+					)}
 					Next
 				</Button>
 			</div>
