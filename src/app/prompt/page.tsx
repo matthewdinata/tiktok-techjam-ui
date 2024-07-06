@@ -11,7 +11,7 @@ import MomentsColumn, { type Card } from "./components/moments-column";
 export default function PromptPage() {
 	const [cards, setCards] = useState<Card[]>([]);
 	return (
-		<div className="bg-neutral-900 h-max flex flex-col min-h-full pb-20">
+		<div className="bg-neutral-900 h-full flex flex-col pb-20 no-scrollbar overflow-y-auto">
 			<div className="p-6 flex flex-col gap-6 w-full">
 				<Link href="/" className="w-full flex text-white">
 					<BiChevronLeft fontSize={24} className="cursor-pointer" />
@@ -23,7 +23,7 @@ export default function PromptPage() {
 				</h1>
 			</div>
 			<MomentsColumn cards={cards} setCards={setCards} />
-			<div className="fixed bottom-4 w-full flex justify-center">
+			<div className="fixed bottom-10 w-full flex justify-center max-w-md">
 				<Button
 					className={`bg-rose-600 hover:bg-rose-700 focus:bg-rose-700 w-4/5 mt-5 ${cards.length === 0 ? "hidden" : ""}`}
 				>
