@@ -5,7 +5,7 @@ const checkValidVideoDuration = (videoFile: File): Promise<boolean> =>
 
 		video.onloadedmetadata = () => {
 			window.URL.revokeObjectURL(video.src);
-			resolve(video.duration >= 5 * 60 && video.duration <= 15 * 60);
+			resolve(video.duration >= 0 * 60 && video.duration <= 15 * 60);
 		};
 
 		video.src = URL.createObjectURL(videoFile);

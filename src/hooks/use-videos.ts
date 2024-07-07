@@ -5,15 +5,15 @@ import { InferSelectModel } from "drizzle-orm";
 
 import videos from "@/db/schema/videos";
 
-import apiClient from "@/app/api/api-client";
-
 import queryKeys from "./query-keys";
+import useAuthApiClient from "./use-auth-api-client";
 
 export type VideoType = InferSelectModel<typeof videos> & {
 	name: string;
 };
 
 export function useVideos() {
+	const apiClient = useAuthApiClient();
 	return useQuery({
 		queryKey: queryKeys.videos.all,
 		queryFn: async () => {
@@ -25,6 +25,7 @@ export function useVideos() {
 }
 
 export function useUserVideos() {
+	const apiClient = useAuthApiClient();
 	return useQuery({
 		queryKey: queryKeys.videos.byUser,
 		queryFn: async () => {
