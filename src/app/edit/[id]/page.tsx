@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { BiBox, BiChevronLeft, BiUpload } from "react-icons/bi";
+
+import { useHighlightPost, useHighlightResults } from "@/hooks/use-highlights";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -16,10 +19,15 @@ export default function EditPage() {
 	const [coverImage, setCoverImage] = useState<string | null>(null);
 	const [music, setMusic] = useState<string | null>(null);
 	const videoRef = useRef<HTMLVideoElement>(null);
+	const { id } = useParams<{ id: string }>();
+
+	const { data: result } = useHighlightResults(id);
+	const { mutate: postVideo } = useHighlightPost(id);
 
 	useEffect(() => {
-		if (videoRef.current) {
-			videoRef.current.src = "/assets/home-vid.mp4";
+		if (videoRef.current && result) {
+			videoRef.current.src = result.output_url;
+			videoRef.current.setAttribute("crossorigin", "anonymous");
 			videoRef.current.onloadedmetadata = () => {
 				videoRef.current!.currentTime = 5; // Move slightly past the first frame
 			};
@@ -31,13 +39,22 @@ export default function EditPage() {
 				}, 100);
 			};
 		}
-	}, []);
+	}, [result]);
+
+	const handlePost = () => {
+		if (!result) return;
+		postVideo({
+			videoUrl: result.output_url!,
+			music,
+			caption: description,
+		});
+	};
 
 	return (
 		<div className="h-full w-full bg-neutral-900">
 			<div className="max-w-md mx-auto p-4 bg-white h-screen flex flex-col relative">
 				<div className="w-full flex my-6">
-					<Link href="/result">
+					<Link href={`result/${id}`}>
 						<BiChevronLeft
 							fontSize={24}
 							className="cursor-pointer"
@@ -97,6 +114,7 @@ export default function EditPage() {
 					<Button
 						className="bg-rose-600 hover:bg-rose-700 focus:bg-rose-700"
 						size="lg"
+						onClick={handlePost}
 					>
 						<BiUpload className="mr-2" />
 						Post
