@@ -43,7 +43,7 @@ export default function ResultPage() {
 
 			{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
 			<video
-				src={result?.videoUrl}
+				src={result?.output_url}
 				autoPlay
 				muted={isMuted}
 				playsInline

@@ -5,11 +5,21 @@ import { useRouter } from "next/navigation";
 
 import queryKeys from "./query-keys";
 import useAuthApiClient from "./use-auth-api-client";
-import { VideoType } from "./use-videos";
 
 interface UploadHighlightParams {
 	file: File;
 	prompt: string[];
+}
+
+interface PostHighlightParams {
+	videoUrl: string;
+	music: string | null;
+	caption: string | null;
+}
+
+interface ResultHighlightResponse {
+	id: string;
+	output_url: string;
 }
 
 export function useUploadHighlight() {
@@ -63,8 +73,35 @@ export function useHighlightResults(taskId: string) {
 			const response = await apiClient.get(
 				`highlights/${taskId}/results`
 			);
-			return response.data as VideoType;
+			return response.data as ResultHighlightResponse;
 		},
 		enabled: !!taskId,
+	});
+}
+
+export function useHighlightPost(taskId: string) {
+	const apiClient = useAuthApiClient();
+	const router = useRouter();
+
+	return useMutation({
+		mutationFn: async ({
+			videoUrl,
+			music,
+			caption,
+		}: PostHighlightParams) => {
+			const body = { video_url: videoUrl, music, caption };
+
+			const response = await apiClient.post(
+				`highlights/${taskId}/post`,
+				body,
+				{
+					headers: { "Content-Type": "application/json" },
+				}
+			);
+			return response.data as string;
+		},
+		onSuccess: () => {
+			router.push("/uploads");
+		},
 	});
 }
