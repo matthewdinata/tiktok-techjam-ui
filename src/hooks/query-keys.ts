@@ -1,7 +1,7 @@
 const queryKeys = {
 	videos: {
 		all: ["videos"],
-		byUser: (userId: string) => ["videos", "user", userId],
+		byUser: ["videos", "user"],
 	},
 	highlights: {
 		status: (taskId: string) => ["highlights", "status", taskId],

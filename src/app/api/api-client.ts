@@ -1,9 +1,7 @@
 import axios from "axios";
 
-const createApiClient = (token?: string) =>
-	axios.create({
-		baseURL: "/api",
-		headers: token ? { Authorization: `Bearer ${token}` } : {},
-	});
+const apiClient = axios.create({
+	baseURL: "/api",
+});
 
-export default createApiClient;
+export default apiClient;

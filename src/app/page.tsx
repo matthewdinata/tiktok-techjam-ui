@@ -32,11 +32,9 @@ const tabs = [
 export default function HomePage() {
 	const [isMuted, setIsMuted] = useState<boolean>(true);
 	const [activeTab, setActiveTab] = useState<number>(2);
-	const userId = "user2";
 
 	const { data: forYouVideos, isLoading: forYouLoading } = useVideos();
-	const { data: uploadsVideos, isLoading: uploadsLoading } =
-		useUserVideos(userId);
+	const { data: uploadsVideos, isLoading: uploadsLoading } = useUserVideos();
 
 	if (uploadsLoading || forYouLoading) return <Loading />;
 

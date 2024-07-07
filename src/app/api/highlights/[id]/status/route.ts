@@ -1,19 +1,29 @@
-import axios from "axios";
-import { NextResponse } from "next/server";
+import axios, { isAxiosError } from "axios";
+import { NextRequest, NextResponse } from "next/server";
 
 // eslint-disable-next-line import/prefer-default-export
 export async function GET(
-	request: Request,
+	request: NextRequest,
 	{ params }: { params: { id: string } }
 ) {
+	const path = `/highlights/${params.id}/status`;
 	try {
-		const response = await axios.get(
-			`https://tiktok-api.tzus.io/highlights/${params.id}/status`
-		);
+		const sessionToken = request.cookies.get("authjs.session-token")?.value;
+		const response = await axios.get(`https://tiktok-api.tzus.io${path}`, {
+			headers: {
+				Authorization: `Bearer ${sessionToken}`,
+			},
+		});
 		return NextResponse.json(response.data);
 	} catch (error) {
+		if (isAxiosError(error)) {
+			return NextResponse.json(
+				{ error: error.response?.data },
+				{ status: error.response?.status }
+			);
+		}
 		return NextResponse.json(
-			{ error: "An error occurred while fetching status" },
+			{ error: `An error occurred on ${path}` },
 			{ status: 500 }
 		);
 	}
