@@ -29,7 +29,7 @@ export function useUserVideos() {
 	return useQuery({
 		queryKey: queryKeys.videos.byUser,
 		queryFn: async () => {
-			const response = await apiClient.get("videos");
+			const response = await apiClient.get("videos/");
 			return response.data as VideoType[];
 		},
 		refetchOnWindowFocus: false,
