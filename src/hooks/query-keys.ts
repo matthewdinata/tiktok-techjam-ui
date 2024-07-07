@@ -6,6 +6,7 @@ const queryKeys = {
 	highlights: {
 		status: (taskId: string) => ["highlights", "status", taskId],
 		results: (taskId: string) => ["highlights", "results", taskId],
+		recent: ["highlights", "recent"],
 	},
 };
 

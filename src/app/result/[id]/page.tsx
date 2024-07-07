@@ -6,9 +6,14 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { BiChevronLeft, BiText } from "react-icons/bi";
 
-import { useHighlightResults } from "@/hooks/use-highlights";
+import {
+	useHighlightResults,
+	useHighlightStatus,
+} from "@/hooks/use-highlights";
 
 import { Button } from "@/components/ui/button";
+
+import Loading from "@/app/components/loading";
 
 import ActionButtons from "../components/action-buttons";
 
@@ -18,7 +23,13 @@ export default function ResultPage() {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { id } = useParams<{ id: string }>();
 
+	const { data } = useHighlightStatus(id);
+	if (data?.status !== "DONE") {
+		router.push("/uploads");
+	}
+
 	const { data: result } = useHighlightResults(id);
+	if (!result || !data) return <Loading />;
 
 	const toggleIsMuted = () => {
 		setIsMuted(!isMuted);
@@ -43,21 +54,14 @@ export default function ResultPage() {
 
 			{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
 			<video
-				src={result?.videoUrl}
+				src={result?.output_url}
 				autoPlay
 				muted={isMuted}
 				playsInline
 				loop
 			/>
 
-			<div className="fixed bottom-5 grid grid-cols-2 justify-center space-x-4 w-full px-4 max-w-[26rem]">
-				<Button
-					variant="secondary"
-					size="lg"
-					className="bg-slate-100 hover:bg-rose-200 focus:bg-rose-200"
-				>
-					Regenerate
-				</Button>
+			<div className="fixed bottom-5 grid grid-cols-1 justify-center space-x-4 w-full px-4 max-w-[26rem]">
 				<Button
 					disabled={isLoading}
 					className="bg-rose-600 hover:bg-rose-700 focus:bg-rose-700"

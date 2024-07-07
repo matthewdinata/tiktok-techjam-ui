@@ -5,11 +5,31 @@ import { useRouter } from "next/navigation";
 
 import queryKeys from "./query-keys";
 import useAuthApiClient from "./use-auth-api-client";
-import { VideoType } from "./use-videos";
 
 interface UploadHighlightParams {
 	file: File;
 	prompt: string[];
+}
+
+interface PostHighlightParams {
+	videoUrl: string;
+	music: string | null;
+	caption: string | null;
+}
+
+interface ResultHighlightResponse {
+	id: string;
+	output_url: string;
+}
+
+interface RecentHighlightResponse {
+	id: string;
+	status: "PROCESSING" | "DONE" | "FAILED" | "CANCELLED" | null;
+	started_at: string;
+}
+interface StatusHighlightResponse {
+	id: string;
+	status: string;
 }
 
 export function useUploadHighlight() {
@@ -44,16 +64,17 @@ export function useHighlightStatus(taskId: string) {
 		queryKey: queryKeys.highlights.status(taskId),
 		queryFn: async () => {
 			const response = await apiClient.get(`highlights/${taskId}/status`);
-			return Number(response.data);
+			return response.data as StatusHighlightResponse;
 		},
 		enabled: !!taskId,
 		refetchInterval: (query) => {
-			const progress = query.state.data;
-			if (progress === 100) return false;
-			return 500;
+			const isProcessing = query.state.data?.status === "PROCESSING";
+			if (isProcessing) return 10000;
+			return false;
 		},
 	});
 }
+
 export function useHighlightResults(taskId: string) {
 	const apiClient = useAuthApiClient();
 
@@ -63,8 +84,47 @@ export function useHighlightResults(taskId: string) {
 			const response = await apiClient.get(
 				`highlights/${taskId}/results`
 			);
-			return response.data as VideoType;
+			return response.data as ResultHighlightResponse;
 		},
 		enabled: !!taskId,
+	});
+}
+
+export function useHighlightPost(taskId: string) {
+	const apiClient = useAuthApiClient();
+	const router = useRouter();
+
+	return useMutation({
+		mutationFn: async ({
+			videoUrl,
+			music,
+			caption,
+		}: PostHighlightParams) => {
+			const body = { video_url: videoUrl, music, caption };
+
+			const response = await apiClient.post(
+				`highlights/${taskId}/post`,
+				body,
+				{
+					headers: { "Content-Type": "application/json" },
+				}
+			);
+			return response.data as string;
+		},
+		onSuccess: () => {
+			router.push("/uploads");
+		},
+	});
+}
+
+export function useHighlightRecent() {
+	const apiClient = useAuthApiClient();
+
+	return useQuery({
+		queryKey: queryKeys.highlights.recent,
+		queryFn: async () => {
+			const response = await apiClient.get("highlights/recent");
+			return response.data as RecentHighlightResponse;
+		},
 	});
 }

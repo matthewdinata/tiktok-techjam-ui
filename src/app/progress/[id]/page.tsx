@@ -1,12 +1,9 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Lottie from "react-lottie";
 
-import Progress from "@/components/ui/progress";
-
-import { useHighlightStatus } from "../../../hooks/use-highlights";
 import * as animationData from "../movie-animation.json";
 
 const defaultOptions = {
@@ -19,26 +16,28 @@ const defaultOptions = {
 };
 
 export default function ProgressPage() {
-	const { id } = useParams<{ id: string }>();
-	const { data: progress } = useHighlightStatus(id);
 	const router = useRouter();
 
 	useEffect(() => {
-		if (progress === 100) {
-			router.push(`/result/${id}`);
-		}
-	}, [progress, id, router]);
+		const timeoutId = setTimeout(() => {
+			router.push("/fyp");
+		}, 5000);
+
+		return () => clearTimeout(timeoutId);
+	}, [router]);
 
 	return (
-		<div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center pb-20">
+		<div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center pb-20 pt-60">
 			<Lottie options={defaultOptions} height={300} width={300} />
 			<span className="text-lg font-semibold text-white">
 				Processing your highlight video
 			</span>
-			<Progress
-				value={Number(progress)}
-				className="w-[60%] mt-2 bg-white"
-			/>
+
+			<span className="text-sm font-normal text-neutral-400 mx-7 text-center mt-auto">
+				This process may take a few minutes.
+				<br />
+				Redirecting to home page...
+			</span>
 		</div>
 	);
 }

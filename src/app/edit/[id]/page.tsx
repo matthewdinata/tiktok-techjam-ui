@@ -2,11 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { BiBox, BiChevronLeft, BiUpload } from "react-icons/bi";
 
+import {
+	useHighlightPost,
+	useHighlightResults,
+	useHighlightStatus,
+} from "@/hooks/use-highlights";
+
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+
+import Loading from "@/app/components/loading";
 
 import EditItems from "../components/edit-items";
 import captureVideoFrame from "../utils";
@@ -16,28 +25,67 @@ export default function EditPage() {
 	const [coverImage, setCoverImage] = useState<string | null>(null);
 	const [music, setMusic] = useState<string | null>(null);
 	const videoRef = useRef<HTMLVideoElement>(null);
+	const { id } = useParams<{ id: string }>();
+	const router = useRouter();
+	const { data } = useHighlightStatus(id);
+	if (data?.status !== "DONE") {
+		router.push("/uploads");
+	}
+
+	const { data: result } = useHighlightResults(id);
+	const { mutate: postVideo } = useHighlightPost(id);
 
 	useEffect(() => {
-		if (videoRef.current) {
-			videoRef.current.src = "/assets/home-vid.mp4";
-			videoRef.current.onloadedmetadata = () => {
-				videoRef.current!.currentTime = 5; // Move slightly past the first frame
+		let timeoutId: number;
+		if (videoRef.current && result) {
+			const video = videoRef.current;
+			video.src = result.output_url;
+			video.setAttribute("crossorigin", "anonymous");
+			const handleLoadedMetadata = () => {
+				video.currentTime = 5; // Move slightly past the first frame
 			};
 
-			videoRef.current.onseeked = () => {
-				setTimeout(() => {
+			const handleSeeked = () => {
+				timeoutId = window.setTimeout(() => {
 					const imageUrl = captureVideoFrame(videoRef);
 					setCoverImage(imageUrl);
 				}, 100);
 			};
+
+			video.addEventListener("loadedmetadata", handleLoadedMetadata);
+			video.addEventListener("seeked", handleSeeked);
+
+			// Cleanup function
+			return () => {
+				video.removeEventListener(
+					"loadedmetadata",
+					handleLoadedMetadata
+				);
+				video.removeEventListener("seeked", handleSeeked);
+				window.clearTimeout(timeoutId);
+				video.src = ""; // Clear the video source
+				video.load(); // Reset the video element
+			};
 		}
-	}, []);
+		return () => {};
+	}, [result]);
+
+	if (!result || !data) return <Loading />;
+
+	const handlePost = () => {
+		if (!result) return;
+		postVideo({
+			videoUrl: result.output_url!,
+			music,
+			caption: description,
+		});
+	};
 
 	return (
 		<div className="h-full w-full bg-neutral-900">
 			<div className="max-w-md mx-auto p-4 bg-white h-screen flex flex-col relative">
 				<div className="w-full flex my-6">
-					<Link href="/result">
+					<Link href={`/result/${id}`}>
 						<BiChevronLeft
 							fontSize={24}
 							className="cursor-pointer"
@@ -97,6 +145,7 @@ export default function EditPage() {
 					<Button
 						className="bg-rose-600 hover:bg-rose-700 focus:bg-rose-700"
 						size="lg"
+						onClick={handlePost}
 					>
 						<BiUpload className="mr-2" />
 						Post

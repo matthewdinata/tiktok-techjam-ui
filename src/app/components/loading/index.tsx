@@ -1,22 +1,11 @@
 "use client";
 
-import Lottie from "react-lottie";
-
-import * as animationData from "./loading-animation.json";
-
-const defaultOptions = {
-	loop: true,
-	autoplay: true,
-	animationData,
-	rendererSettings: {
-		preserveAspectRatio: "xMidYMid slice",
-	},
-};
+import Spinner from "@/components/icons";
 
 export default function Loading() {
 	return (
-		<div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center pb-20">
-			<Lottie options={defaultOptions} height={200} width={200} />
+		<div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center gap-10">
+			<Spinner className="h-36 w-36" />
 			<span className="text-lg font-semibold text-white">
 				Hold on, we&apos;re getting your videos...
 			</span>

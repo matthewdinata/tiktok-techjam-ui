@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 
+import { useHighlightRecent } from "@/hooks/use-highlights";
 import { useFile } from "@/lib/context";
 
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 
+import DisabledUploadButton from "./disabled-upload-button";
 import DurationAlert from "./duration-alert";
 import TemplateContainer from "./template-container";
 import checkValidVideoDuration from "./utils";
@@ -74,6 +76,9 @@ function TikTokHighlightsButton() {
 }
 
 export default function UploadModal() {
+	const { data: recentTask } = useHighlightRecent();
+	const isProcessing =
+		recentTask?.status === "PROCESSING" || recentTask?.status === "DONE";
 	return (
 		<>
 			<Dialog>
@@ -99,7 +104,13 @@ export default function UploadModal() {
 									posterSrc="/assets/highlights-poster.jpg"
 									posterAlt="Highlights poster"
 									creator="TikTok"
-									buttonComponent={<TikTokHighlightsButton />}
+									buttonComponent={
+										isProcessing ? (
+											<DisabledUploadButton />
+										) : (
+											<TikTokHighlightsButton />
+										)
+									}
 								/>
 							</CarouselItem>
 							<CarouselItem>
