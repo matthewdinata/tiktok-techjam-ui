@@ -6,7 +6,6 @@ const videos = pgTable("video", {
 	id: text("id")
 		.primaryKey()
 		.$defaultFn(() => crypto.randomUUID()),
-	name: text("name").notNull(),
 	caption: text("caption"),
 	music: text("music"),
 	videoUrl: text("videoUrl").notNull(),

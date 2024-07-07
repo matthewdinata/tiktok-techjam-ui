@@ -3,8 +3,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
+import apiClient from "@/app/api/api-client";
+
 import queryKeys from "./query-keys";
-import useAuthApiClient from "./use-auth-api-client";
 import { VideoType } from "./use-videos";
 
 interface UploadHighlightParams {
@@ -13,7 +14,6 @@ interface UploadHighlightParams {
 }
 
 export function useUploadHighlight() {
-	const apiClient = useAuthApiClient();
 	const router = useRouter();
 
 	return useMutation({
@@ -38,7 +38,6 @@ export function useUploadHighlight() {
 }
 
 export function useHighlightStatus(taskId: string) {
-	const apiClient = useAuthApiClient();
 	return useQuery({
 		queryKey: queryKeys.highlights.status(taskId),
 		queryFn: async () => {
@@ -54,7 +53,6 @@ export function useHighlightStatus(taskId: string) {
 	});
 }
 export function useHighlightResults(taskId: string) {
-	const apiClient = useAuthApiClient();
 	return useQuery({
 		queryKey: queryKeys.highlights.results(taskId),
 		queryFn: async () => {

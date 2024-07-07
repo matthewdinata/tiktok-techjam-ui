@@ -1,21 +1,31 @@
-import axios from "axios";
-import { NextResponse } from "next/server";
+import axios, { isAxiosError } from "axios";
+import { NextRequest, NextResponse } from "next/server";
 
 // eslint-disable-next-line import/prefer-default-export
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+	const path = "/highlights/upload";
 	try {
 		const formData = await request.formData();
+		const sessionToken = request.cookies.get("authjs.session-token")?.value;
 		const response = await axios.post(
-			"https://tiktok-api.tzus.io/highlights/upload",
+			`https://tiktok-api.tzus.io${path}`,
 			formData,
 			{
-				headers: { "Content-Type": "multipart/form-data" },
+				headers: {
+					Authorization: `Bearer ${sessionToken}`,
+				},
 			}
 		);
 		return NextResponse.json(response.data);
 	} catch (error) {
+		if (isAxiosError(error)) {
+			return NextResponse.json(
+				{ error: error.response?.data },
+				{ status: error.response?.status }
+			);
+		}
 		return NextResponse.json(
-			{ error: "An error occurred during upload" },
+			{ error: `An error occurred on ${path}` },
 			{ status: 500 }
 		);
 	}

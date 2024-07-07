@@ -5,29 +5,32 @@ import { InferSelectModel } from "drizzle-orm";
 
 import videos from "@/db/schema/videos";
 
-import queryKeys from "./query-keys";
-import useAuthApiClient from "./use-auth-api-client";
+import apiClient from "@/app/api/api-client";
 
-export type VideoType = InferSelectModel<typeof videos>;
+import queryKeys from "./query-keys";
+
+export type VideoType = InferSelectModel<typeof videos> & {
+	name: string;
+};
 
 export function useVideos() {
-	const apiClient = useAuthApiClient();
 	return useQuery({
 		queryKey: queryKeys.videos.all,
+		queryFn: async () => {
+			const response = await apiClient.get("videos/fyp");
+			return response.data as VideoType[];
+		},
+		refetchOnWindowFocus: false,
+	});
+}
+
+export function useUserVideos() {
+	return useQuery({
+		queryKey: queryKeys.videos.byUser,
 		queryFn: async () => {
 			const response = await apiClient.get("videos");
 			return response.data as VideoType[];
 		},
-	});
-}
-
-export function useUserVideos(userId: string) {
-	const apiClient = useAuthApiClient();
-	return useQuery({
-		queryKey: queryKeys.videos.byUser(userId),
-		queryFn: async () => {
-			const response = await apiClient.get(`videos?user=${userId}`);
-			return response.data as VideoType[];
-		},
+		refetchOnWindowFocus: false,
 	});
 }

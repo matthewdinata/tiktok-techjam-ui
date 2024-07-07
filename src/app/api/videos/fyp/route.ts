@@ -2,11 +2,8 @@ import axios, { isAxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
 // eslint-disable-next-line import/prefer-default-export
-export async function GET(
-	request: NextRequest,
-	{ params }: { params: { id: string } }
-) {
-	const path = `/highlights/${params.id}/results`;
+export async function GET(request: NextRequest) {
+	const path = "/videos/fyp";
 	try {
 		const sessionToken = request.cookies.get("authjs.session-token")?.value;
 		const response = await axios.get(`https://tiktok-api.tzus.io${path}`, {
