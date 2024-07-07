@@ -37,7 +37,13 @@ export default function PromptPage() {
 				</h1>
 			</div>
 			<MomentsColumn cards={cards} setCards={setCards} />
-			<div className="fixed bottom-10 w-full flex justify-center max-w-md">
+			<div className="fixed bottom-10 w-full flex justify-center  items-center max-w-md flex-col">
+				{isPending && (
+					<p className="text-sm font-normal text-neutral-400 mx-7 text-center mb-1">
+						Please hold on for a few moments. Your video is being
+						uploaded! ⏳
+					</p>
+				)}
 				<Button
 					className={`bg-rose-600 hover:bg-rose-700 focus:bg-rose-700 w-4/5 mt-5 ${cards.length === 0 ? "hidden" : ""}`}
 					onClick={handleUpload}
