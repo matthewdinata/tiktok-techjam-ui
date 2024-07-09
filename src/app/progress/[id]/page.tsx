@@ -30,7 +30,7 @@ export default function ProgressPage() {
 	}, [progress, id, router]);
 
 	return (
-		<div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center pb-20">
+		<div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center pb-20 pt-60">
 			<Lottie options={defaultOptions} height={300} width={300} />
 			<span className="text-lg font-semibold text-white">
 				Processing your highlight video
@@ -39,6 +39,11 @@ export default function ProgressPage() {
 				value={Math.max(Number(progress), 30)}
 				className="w-[60%] mt-2 bg-white"
 			/>
+			<span className="text-sm font-normal text-neutral-400 mx-7 text-center mt-auto">
+				This process may take a few minutes.
+				<br />
+				Please keep this page open.
+			</span>
 		</div>
 	);
 }
