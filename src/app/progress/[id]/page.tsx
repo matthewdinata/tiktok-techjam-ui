@@ -36,7 +36,7 @@ export default function ProgressPage() {
 				Processing your highlight video
 			</span>
 			<Progress
-				value={Number(progress)}
+				value={Math.max(Number(progress), 30)}
 				className="w-[60%] mt-2 bg-white"
 			/>
 		</div>
