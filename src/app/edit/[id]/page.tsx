@@ -54,7 +54,7 @@ export default function EditPage() {
 		<div className="h-full w-full bg-neutral-900">
 			<div className="max-w-md mx-auto p-4 bg-white h-screen flex flex-col relative">
 				<div className="w-full flex my-6">
-					<Link href={`result/${id}`}>
+					<Link href={`/result/${id}`}>
 						<BiChevronLeft
 							fontSize={24}
 							className="cursor-pointer"

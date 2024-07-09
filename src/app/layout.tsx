@@ -10,8 +10,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "TikTok TechJam 2024",
-	description: "Embracing Creativity with Generative AI",
+	title: "SnapSynch - Transform Any Video into Highlights with Ease",
+	description:
+		"Embracing Creativity with Generative AI - TikTok TechJam 2024",
 };
 
 export default async function RootLayout({
