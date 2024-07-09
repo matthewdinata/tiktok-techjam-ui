@@ -60,7 +60,7 @@ export function useHighlightStatus(taskId: string) {
 		refetchInterval: (query) => {
 			const progress = query.state.data;
 			if (progress === 100) return false;
-			return 500;
+			return 7000;
 		},
 	});
 }
